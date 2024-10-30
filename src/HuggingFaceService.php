@@ -38,8 +38,6 @@ class HuggingFaceService implements AIServiceInterface
 
     /**
      * Get the Hugging Face model.
-     *
-     * @return string
      */
     public function getModel(): string
     {
@@ -58,8 +56,6 @@ class HuggingFaceService implements AIServiceInterface
 
     /**
      * Get the API token.
-     *
-     * @return string|null
      */
     public function getApiKey(): ?string
     {
@@ -78,8 +74,6 @@ class HuggingFaceService implements AIServiceInterface
 
     /**
      * Get the payload.
-     *
-     * @return array
      */
     public function getPayload(): array
     {
@@ -100,8 +94,6 @@ class HuggingFaceService implements AIServiceInterface
 
     /**
      * Get the base URI.
-     *
-     * @return string
      */
     public function getBaseUri(): string
     {
@@ -120,7 +112,7 @@ class HuggingFaceService implements AIServiceInterface
         return rescue(function () {
             $response = Http::withHeaders([
                 'Authorization' => "Bearer {$this->apiToken}",
-            ])->post($this->baseUri . $this->model, $this->payload);
+            ])->post($this->baseUri.$this->model, $this->payload);
 
             if ($response->failed()) {
                 throw new \Exception('Failed to retrieve response from Hugging Face API.');
@@ -149,6 +141,6 @@ class HuggingFaceService implements AIServiceInterface
      */
     private function processImageResponse(string $data): string
     {
-        return 'data:image/png;base64,' . base64_encode($data);
+        return 'data:image/png;base64,'.base64_encode($data);
     }
 }
